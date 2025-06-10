@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=postgres
+      - DB_DATABASE=picpay
+      - DB_SYNCHRONIZE=true
+    depends_on:
+      - postgres
+    networks:
+      - picpay-network
+
+  postgres:
+    image: postgres:14-alpine
+    restart: always
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=picpay
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - picpay-network
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - '8080:8080'
+    depends_on:
+      - postgres
+    networks:
+      - picpay-network
+
+networks:
+  picpay-network:
+    driver: bridge
+
+volumes:
+  postgres-data:

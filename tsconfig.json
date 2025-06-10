@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "ES2021",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./src", // ✅ baseUrl ideal para usar @/
+    "incremental": true,
+    "skipLibCheck": true,
+    "strict": true, // ✅ Atalho para várias regras
+    "strictNullChecks": true,
+    "rootDir": "./src",
+    "noImplicitAny": true,
+    "strictBindCallApply": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "esModuleInterop": true, // ✅ importante para libs externas
+    "paths": {
+      "@/*": ["*"] // ✅ funciona com baseUrl: "./src"
+    }
+  },
+  "exclude": ["node_modules", "dist", "test", "**/*.spec.ts"]
+}
